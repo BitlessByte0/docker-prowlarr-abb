@@ -1,0 +1,1 @@
+docker build -t bitlessbyte/prowlarr:latest -t bitlessbyte/prowlarr:develop . && docker push bitlessbyte/prowlarr --all-tags
