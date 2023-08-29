@@ -9,6 +9,10 @@ This is a fork of docker-prowlarr from the linuxserver.io team that adds AudioBo
 
 AudioBookBay has blocked Prowlarr's User-Agent from accessing their site making ABB unusable with the offical docker image(s). By changing the User-Agent we are able to bypass ABB's restrictions and continue to use Prowlarr to its fullest potential.
 
+# Credit
+
+I am not the one who came up with this solution. The original solution was found and implemented by [WardDrake]("https://github.com/WarDrake). Kudos to them for making this happen. His method required a manual process and as such his container has fallen out of date. I have made the process automatic with hopes to keep the container up to date with Prowlarr's dev branch.
+
 # What's next?
 
 Since there are only 3 lines of coded edited from the official docker image(s) this is a drop in replacement. Feel free to change your image and continue on your merry way. The rest of this document is the official README from the linuxserver.io team. The documentation they have provided is fully applicable to this container.
