@@ -64,14 +64,14 @@ Find us at:
 
 We utilise the docker manifest for multi-platform awareness. More information is available from docker [here](https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-2.md#manifest-list) and our announcement [here](https://blog.linuxserver.io/2019/02/21/the-lsio-pipeline-project/).
 
-Simply pulling `lscr.io/linuxserver/prowlarr:latest` should retrieve the correct image for your arch, but you can also pull specific arch images via tags.
+Simply pulling `bitlessbyte/prowlarr:latest` should retrieve the correct image for your arch, but you can also pull specific arch images via tags.
 
 The architectures supported by this image are:
 
 | Architecture | Available | Tag                     |
 | :----------: | :-------: | ----------------------- |
 |    x86-64    |    ✅     | amd64-\<version tag\>   |
-|    arm64     |    ✅     | arm64v8-\<version tag\> |
+|    arm64     |    ❌     | arm64v8-\<version tag\> |
 |    armhf     |    ❌     |                         |
 
 ## Version Tags
@@ -82,7 +82,7 @@ This image provides various versions that are available via tags. Please read th
 | :-----: | :-------: | ------------------------------------------- |
 | latest  |    ✅     | Prowlarr stable releases                    |
 | develop |    ✅     | Prowlarr releases from their develop branch |
-| nightly |    ✅     | Prowlarr releases from their nightly branch |
+| nightly |    ❌     | Prowlarr releases from their nightly branch |
 
 ## Application Setup
 
@@ -101,7 +101,7 @@ Here are some example snippets to help you get started creating a container.
 version: "2.1"
 services:
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
+    image: bitlessbyte/prowlarr:latest
     container_name: prowlarr
     environment:
       - PUID=1000
@@ -125,7 +125,7 @@ docker run -d \
   -p 9696:9696 \
   -v /path/to/data:/config \
   --restart unless-stopped \
-  lscr.io/linuxserver/prowlarr:latest
+  bitlessbyte/prowlarr:latest
 
 ```
 
@@ -184,7 +184,7 @@ We publish various [Docker Mods](https://github.com/linuxserver/docker-mods) to 
 - container version number
   - `docker inspect -f '{{ index .Config.Labels "build_version" }}' prowlarr`
 - image version number
-  - `docker inspect -f '{{ index .Config.Labels "build_version" }}' lscr.io/linuxserver/prowlarr:latest`
+  - `docker inspect -f '{{ index .Config.Labels "build_version" }}' bitlessbyte/prowlarr:latest`
 
 ## Updating Info
 
@@ -202,7 +202,7 @@ Below are the instructions for updating containers:
 
 ### Via Docker Run
 
-- Update the image: `docker pull lscr.io/linuxserver/prowlarr:latest`
+- Update the image: `docker pull bitlessbyte/prowlarr:latest`
 - Stop the running container: `docker stop prowlarr`
 - Delete the container: `docker rm prowlarr`
 - Recreate a new container with the same docker run parameters as instructed above (if mapped correctly to a host folder, your `/config` folder and settings will be preserved)
@@ -232,12 +232,12 @@ Below are the instructions for updating containers:
 If you want to make local modifications to these images for development purposes or just to customize the logic:
 
 ```bash
-git clone https://github.com/linuxserver/docker-prowlarr.git
-cd docker-prowlarr
+git clone https://github.com/BitlessByte0/docker-prowlarr-abb.git
+cd docker-prowlarr-abb
 docker build \
   --no-cache \
   --pull \
-  -t lscr.io/linuxserver/prowlarr:latest .
+  -t bitlessbyte/prowlarr:latest .
 ```
 
 The ARM variants can be built on x86_64 hardware using `multiarch/qemu-user-static`
@@ -250,6 +250,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+- **08.29.23:** - Change User-Agent to bypass AudioBookBay's block.
 - **06.06.23:** - Rebase master to Alpine 3.18, deprecate armhf as per [https://www.linuxserver.io/armhf](https://www.linuxserver.io/armhf).
 - **03.01.23:** - Publish stable release.
 - **20.02.22:** - Rebase develop branch to Alpine.
