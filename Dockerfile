@@ -52,6 +52,7 @@ RUN \
   # Add Versioning Info
   echo -e "UpdateMethod=docker\nBranch=${PROWLARR_BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=BitlessByte)" > /app/prowlarr/package_info && \
   echo "**** cleanup ****" && \
+  dotnet nuget locals all -c && \
   rm -rf \
     /app/prowlarr/Prowlarr \
     /tmp/* \
